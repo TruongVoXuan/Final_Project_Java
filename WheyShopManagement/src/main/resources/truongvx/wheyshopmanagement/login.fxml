@@ -16,41 +16,41 @@
   <children>
     <AnchorPane prefHeight="200.0" prefWidth="200.0">
       <children>
-        <AnchorPane fx:id="si_loginForm" layoutX="304.0" layoutY="7.0" prefHeight="401.0" prefWidth="300.0" styleClass="white-form" stylesheets="@loginDesign.css">
+        <AnchorPane fx:id="si_loginForm" layoutX="304.0" layoutY="7.0" prefHeight="401.0" prefWidth="300.0" styleClass="white-form" stylesheets="@loginDesign.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
             <Label layoutX="34.0" layoutY="67.0" styleClass="head-label" stylesheets="@loginDesign.css" text="Đăng Nhập Tài Khoản" textFill="#4ea476">
               <font>
                 <Font size="20.0" />
               </font>
             </Label>
-            <TextField fx:id="si_username" layoutX="40.0" layoutY="156.0" prefHeight="30.0" prefWidth="220.0" promptText="Tài khoản" styleClass="textfield" stylesheets="@loginDesign.css" />
-            <PasswordField fx:id="si_password" layoutX="40.0" layoutY="193.0" prefHeight="30.0" prefWidth="220.0" promptText="Mật khẩu" styleClass="textfield" stylesheets="@loginDesign.css" />
-            <Button fx:id="si_loginBtn" layoutX="40.0" layoutY="261.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Đăng nhập" />
+            <TextField fx:id="si_username" layoutX="40.0" layoutY="156.0" onAction="#loginBtn" prefHeight="30.0" prefWidth="220.0" promptText="Tài khoản" styleClass="textfield" stylesheets="@loginDesign.css" />
+            <PasswordField fx:id="si_password" layoutX="40.0" layoutY="193.0" onAction="#loginBtn" prefHeight="30.0" prefWidth="220.0" promptText="Mật khẩu" styleClass="textfield" stylesheets="@loginDesign.css" />
+            <Button fx:id="si_loginBtn" layoutX="40.0" layoutY="261.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Đăng nhập" />
             <Hyperlink fx:id="si_forgotpass" layoutX="40.0" layoutY="232.0" text="Quên mật khẩu?" />
           </children>
         </AnchorPane>
-        <AnchorPane fx:id="su_signupForm" layoutY="7.0" prefHeight="401.0" prefWidth="300.0" styleClass="white-form" stylesheets="@loginDesign.css">
+        <AnchorPane fx:id="su_signupForm" layoutY="7.0" prefHeight="401.0" prefWidth="300.0" styleClass="white-form" stylesheets="@loginDesign.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
           <children>
             <Label layoutX="34.0" layoutY="67.0" styleClass="head-label" stylesheets="@loginDesign.css" text="Đăng Kí Tài Khoản" textFill="#4ea476">
               <font>
                 <Font size="20.0" />
               </font>
             </Label>
-            <TextField fx:id="su_username" layoutX="34.0" layoutY="126.0" prefHeight="30.0" prefWidth="220.0" promptText="Tài khoản" styleClass="textfield" stylesheets="@loginDesign.css" />
-            <PasswordField fx:id="su_password" layoutX="34.0" layoutY="170.0" prefHeight="30.0" prefWidth="220.0" promptText="Mật khẩu" styleClass="textfield" stylesheets="@loginDesign.css" />
-            <Button fx:id="su_signupBtn" layoutX="34.0" layoutY="316.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Đăng kí" />
-            <ComboBox fx:id="su_question" layoutX="34.0" layoutY="215.0" prefHeight="30.0" prefWidth="220.0" promptText="Câu hỏi" styleClass="textfield" stylesheets="@loginDesign.css" />
-            <TextField fx:id="su_answer" layoutX="34.0" layoutY="258.0" prefHeight="30.0" prefWidth="220.0" promptText="Câu trả lời" styleClass="textfield" stylesheets="@loginDesign.css" />
+            <TextField fx:id="su_username" layoutX="34.0" layoutY="126.0" onAction="#loginBtn" prefHeight="30.0" prefWidth="220.0" promptText="Tài khoản" styleClass="textfield" stylesheets="@loginDesign.css" />
+            <PasswordField fx:id="su_password" layoutX="34.0" layoutY="170.0" onAction="#loginBtn" prefHeight="30.0" prefWidth="220.0" promptText="Mật khẩu" styleClass="textfield" stylesheets="@loginDesign.css" />
+            <Button fx:id="su_signupBtn" layoutX="34.0" layoutY="316.0" mnemonicParsing="false" onAction="#regBtn" prefHeight="40.0" prefWidth="220.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Đăng kí" />
+            <ComboBox fx:id="su_question" layoutX="34.0" layoutY="215.0" onAction="#loginBtn" prefHeight="30.0" prefWidth="220.0" promptText="Câu hỏi" styleClass="textfield" stylesheets="@loginDesign.css" />
+            <TextField fx:id="su_answer" layoutX="34.0" layoutY="258.0" onAction="#loginBtn" prefHeight="30.0" prefWidth="220.0" promptText="Câu trả lời" styleClass="textfield" stylesheets="@loginDesign.css" />
           </children>
         </AnchorPane>
-        <AnchorPane fx:id="side_form" prefHeight="409.0" prefWidth="300.0" styleClass="gradient" stylesheets="@loginDesign.css">
+        <AnchorPane fx:id="side_form" prefHeight="409.0" prefWidth="300.0" styleClass="gradient" stylesheets="@loginDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
           <children>
             <Label layoutX="87.0" layoutY="307.0" text="Tạo Tài Khoản" textFill="#f4ffe4">
               <font>
                 <Font size="20.0" />
               </font>
             </Label>
-            <Button fx:id="side_createBtn" layoutX="40.0" layoutY="346.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="220.0" styleClass="create-btn" stylesheets="@loginDesign.css" text="Tạo mới tài khoản" />
+            <Button fx:id="side_createBtn" layoutX="40.0" layoutY="346.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="220.0" styleClass="create-btn" stylesheets="@loginDesign.css" text="Tạo mới tài khoản" AnchorPane.bottomAnchor="14.0" />
             <Button fx:id="side_alreadyAccount" layoutX="40.0" layoutY="346.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="220.0" styleClass="create-btn" stylesheets="@loginDesign.css" text="Đã có tài khoản" visible="false" />
 
             <!-- Giữ lại chỉ hình ảnh logo1.png -->

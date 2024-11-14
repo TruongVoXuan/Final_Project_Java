@@ -12,7 +12,9 @@ public class WheyShopMain extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(WheyShopMain.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("WHEY SHOP MANAGEMENT");
+        stage.setMinHeight (400);
+        stage.setMinWidth(620);
         stage.setScene(scene);
         stage.show();
     }
