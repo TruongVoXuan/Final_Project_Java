@@ -19,6 +19,39 @@ import java.util.ResourceBundle;
 public class WheyShopController implements Initializable {
 
     @FXML
+    private TextField fp_username;
+
+    @FXML
+    private TextField fp_answer;
+
+    @FXML
+    private Button fp_backBtn;
+
+    @FXML
+    private Button fp_proceedBtn;
+
+    @FXML
+    private ComboBox<?> fp_question;
+
+    @FXML
+    private AnchorPane fp_questionForm;
+
+    @FXML
+    private Button np_backBtn;
+
+    @FXML
+    private Button np_changePassBtn;
+
+    @FXML
+    private PasswordField np_confirmPassword;
+
+    @FXML
+    private AnchorPane np_newPassForm;
+
+    @FXML
+    private PasswordField np_newPassword;
+
+    @FXML
     private Hyperlink si_forgotpass;
 
     @FXML
@@ -32,6 +65,9 @@ public class WheyShopController implements Initializable {
 
     @FXML
     private TextField si_username;
+
+    @FXML
+    private Button side_alreadyAccount;
 
     @FXML
     private Button side_createBtn;
@@ -57,9 +93,6 @@ public class WheyShopController implements Initializable {
     @FXML
     private TextField su_username;
 
-    @FXML
-    private Button side_alreadyAccount;
-
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet result;
@@ -80,6 +113,8 @@ public class WheyShopController implements Initializable {
         ObservableList<String> listData = FXCollections.observableArrayList(listQ);
         su_question.setItems(listData);
     }
+
+
 
     public void loginBtn() {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
@@ -108,7 +143,7 @@ public class WheyShopController implements Initializable {
                         alert.showAndWait();
                     } else {
                         alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Information Message");
+                        alert.setTitle("Database Connection Error");
                         alert.setHeaderText(null);
                         alert.setContentText("Thông tin nhập vào không chính xác");
                         alert.showAndWait();
@@ -122,10 +157,11 @@ public class WheyShopController implements Initializable {
                     alert.showAndWait();
                 }
             } else {
+
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Database Connection Error");
+                alert.setTitle("Information Message");
                 alert.setHeaderText(null);
-                alert.setContentText("Không thể kết nối đến cơ sở dữ liệu.");
+                alert.setContentText("Thông tin nhập vào không chính xác");
                 alert.showAndWait();
             }
         }
@@ -224,6 +260,163 @@ public class WheyShopController implements Initializable {
         slider.play();
     }
 
+    public void forgotPassQuestionList () {
+        List<String> listQ = new ArrayList<>();
+
+        for (String data: questionList) {
+            listQ.add(data);
+        }
+            ObservableList listData = FXCollections.observableArrayList(listQ);
+            fp_question.setItems(listData);
+    }
+
+    public void backLoginForm() {
+        si_loginForm.setVisible(true);
+        fp_questionForm.setVisible(false);
+
+        // Xóa dữ liệu của form đăng nhập
+        clearLoginForm();
+    }
+
+
+    public void backQuestionForm() {
+        fp_questionForm.setVisible(true);
+        np_newPassForm.setVisible(false);
+
+        // Xóa dữ liệu của form đặt lại mật khẩu
+        clearNewPassForm();
+        clearForgotPassForm();
+    }
+
+
+    public  void proceedBtn() throws SQLException {
+        if(fp_username.getText().isEmpty()|| fp_question.getSelectionModel().getSelectedItem() == null || fp_answer.getText().isEmpty()){
+
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.getHeaderText();
+            alert.setContentText("Vui lòng nhập đầy đủ thông tin!");
+            alert.showAndWait();
+        }
+        else {
+                String selectData = "SELECT username, question, answer FROM employee WHERE username = ? AND question = ? AND answer = ?";
+
+                connect = database.connectDB();
+
+                try{
+                    prepare = connect.prepareStatement(selectData);
+                    prepare.setString(1, fp_username.getText());
+                    prepare.setString(2, (String)fp_question.getSelectionModel().getSelectedItem() );
+                    prepare.setString(3,fp_answer.getText());
+
+                    result = prepare.executeQuery();
+                    if(result.next()){
+                        np_newPassForm.setVisible(true);
+                        fp_questionForm.setVisible(false);
+                    }else {
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.getHeaderText();
+                        alert.setContentText("Thông tin không chính xác!");
+                        alert.showAndWait();
+
+                    }
+
+                }catch (Exception e) {e.printStackTrace();}
+        }
+
+    }
+
+    public void changePassBtn() {
+        if (np_newPassword.getText().isEmpty() || np_confirmPassword.getText().isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Vui lòng nhập đầy đủ thông tin!");
+            alert.showAndWait();
+        } else {
+            if (np_newPassword.getText().equals(np_confirmPassword.getText())) {
+                String date = null; // Khởi tạo giá trị date là null
+                connect = database.connectDB();
+
+                try {
+                    // Lấy giá trị date từ cơ sở dữ liệu
+                    String getDate = "SELECT date FROM employee WHERE username = ?";
+                    prepare = connect.prepareStatement(getDate);
+                    prepare.setString(1, fp_username.getText());
+                    result = prepare.executeQuery();
+
+                    if (result.next()) {
+                        date = result.getString("date"); // Gán giá trị date từ cơ sở dữ liệu nếu có
+                    }
+
+                    // Câu lệnh cập nhật thông tin người dùng
+                    String updatePass = "UPDATE employee SET password = ?, question = ?, answer = ?, date = ? WHERE username = ?";
+                    prepare = connect.prepareStatement(updatePass);
+                    prepare.setString(1, np_newPassword.getText());
+                    prepare.setString(2, (String) fp_question.getSelectionModel().getSelectedItem());
+                    prepare.setString(3, fp_answer.getText());
+                    prepare.setString(4, date); // Truyền null nếu date không tồn tại
+                    prepare.setString(5, fp_username.getText());
+
+                    int rowsAffected = prepare.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Information Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Thay đổi mật khẩu thành công!");
+                        alert.showAndWait();
+
+                        // Chuyển về form đăng nhập và xóa dữ liệu cũ
+                        si_loginForm.setVisible(true);
+                        np_newPassForm.setVisible(false);
+
+                        // Xóa dữ liệu các trường
+                        np_confirmPassword.setText("");
+                        np_newPassword.setText("");
+                        fp_question.getSelectionModel().clearSelection();
+                        fp_answer.setText("");
+                        fp_username.setText("");
+                    } else {
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Không thể thay đổi mật khẩu. Vui lòng thử lại!");
+                        alert.showAndWait();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("SQL Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Lỗi khi thực hiện truy vấn cơ sở dữ liệu.");
+                    alert.showAndWait();
+                }
+            } else {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Thông tin không trùng khớp!");
+                alert.showAndWait();
+            }
+        }
+    }
+
+
+
+    public void switchForgotPass() {
+        fp_questionForm.setVisible(true);
+        si_loginForm.setVisible(false);
+
+        // Xóa dữ liệu của form quên mật khẩu
+        clearForgotPassForm();
+
+        // Tải danh sách câu hỏi bảo mật
+        forgotPassQuestionList();
+    }
+
+
     public void switchForm(ActionEvent event) {
         TranslateTransition slider = new TranslateTransition();
         slider.setDuration(Duration.seconds(0.5));
@@ -235,7 +428,14 @@ public class WheyShopController implements Initializable {
             slider.setOnFinished((ActionEvent e) -> {
                 side_alreadyAccount.setVisible(true);
                 side_createBtn.setVisible(false);
-                regLquestionList();
+
+                // Xóa dữ liệu của form đăng ký
+                clearSignupForm();
+
+                // Đảm bảo các form khác được ẩn
+                fp_questionForm.setVisible(false);
+                si_loginForm.setVisible(true);
+                np_newPassForm.setVisible(false);
             });
             slider.play();
         } else if (event.getSource() == side_alreadyAccount) {
@@ -245,8 +445,42 @@ public class WheyShopController implements Initializable {
             slider.setOnFinished((ActionEvent e) -> {
                 side_alreadyAccount.setVisible(false);
                 side_createBtn.setVisible(true);
+
+                // Xóa dữ liệu của form đăng nhập
+                clearLoginForm();
+
+                // Đảm bảo các form khác được ẩn
+                fp_questionForm.setVisible(false);
+                si_loginForm.setVisible(true);
+                np_newPassForm.setVisible(false);
             });
             slider.play();
         }
     }
+
+
+    // CLEAR INFORMATION
+    private void clearSignupForm() {
+        su_username.setText("");
+        su_password.setText("");
+        su_question.getSelectionModel().clearSelection();
+        su_answer.setText("");
+    }
+
+    private void clearLoginForm() {
+        si_username.setText("");
+        si_password.setText("");
+    }
+
+    private void clearForgotPassForm() {
+        fp_username.setText("");
+        fp_question.getSelectionModel().clearSelection();
+        fp_answer.setText("");
+    }
+
+    private void clearNewPassForm() {
+        np_newPassword.setText("");
+        np_confirmPassword.setText("");
+    }
+
 }
