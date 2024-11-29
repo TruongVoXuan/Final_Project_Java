@@ -1,4 +1,4 @@
-package truongvx.wheyshopmanagement;
+package truongvx.wheyshopmanagement.controllers;
 
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import truongvx.wheyshopmanagement.utils.database;
 
 import java.net.URL;
 import java.sql.*;

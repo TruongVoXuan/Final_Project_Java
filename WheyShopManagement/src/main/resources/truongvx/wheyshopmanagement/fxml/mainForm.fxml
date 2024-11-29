@@ -19,9 +19,9 @@
                <left>
                   <AnchorPane prefHeight="600.0" prefWidth="235.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutX="29.0" layoutY="190.0" prefHeight="600.0" prefWidth="235.2" styleClass="nav-form" stylesheets="@mainFormDesgin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutX="29.0" layoutY="190.0" prefHeight="600.0" prefWidth="235.2" styleClass="nav-form" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="18.0" layoutY="81.0" prefHeight="101.0" prefWidth="235.0" styleClass="header" stylesheets="@mainFormDesgin.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <AnchorPane layoutX="18.0" layoutY="81.0" prefHeight="101.0" prefWidth="235.0" styleClass="header" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <Label layoutX="7.0" layoutY="40.0" text="Whey Shop Managerment System" textFill="WHITE">
                                        <font>
@@ -40,15 +40,15 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="12.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesgin.css" text="TỔNG QUAN" />
-                              <Button layoutX="12.0" layoutY="271.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesgin.css" text="KHO HÀNG" />
-                              <Button layoutX="12.0" layoutY="327.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesgin.css" text="MENU" />
-                              <Button layoutX="12.0" layoutY="383.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@mainFormDesgin.css" text="KHÁCH HÀNG" />
-                              <Button layoutX="14.0" layoutY="558.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" stylesheets="@mainFormDesgin.css" textFill="#403c3c">
+                              <Button layoutX="12.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="TỔNG QUAN" />
+                              <Button layoutX="12.0" layoutY="271.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHO HÀNG" />
+                              <Button layoutX="12.0" layoutY="327.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="MENU" />
+                              <Button layoutX="12.0" layoutY="383.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHÁCH HÀNG" />
+                              <Button layoutX="14.0" layoutY="558.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" stylesheets="@../CSS/mainFormDesgin.css" textFill="#403c3c">
                                  <graphic>
                                     <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="logout">
                                        <image>
-                                          <Image url="@exit-arrow.png" />
+                                          <Image url="@../Images/exit-arrow.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

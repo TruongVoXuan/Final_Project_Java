@@ -1,4 +1,4 @@
-package truongvx.wheyshopmanagement;
+package truongvx.wheyshopmanagement.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

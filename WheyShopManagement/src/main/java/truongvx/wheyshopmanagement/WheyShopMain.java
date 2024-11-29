@@ -10,7 +10,7 @@ import java.io.IOException;
 public class WheyShopMain extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WheyShopMain.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WheyShopMain.class.getResource("fxml/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("WHEY SHOP MANAGEMENT");
         stage.setMinHeight (400);
