@@ -114,8 +114,6 @@ public class WheyShopController implements Initializable {
         su_question.setItems(listData);
     }
 
-
-
     public void loginBtn() {
         if (si_username.getText().isEmpty() || si_password.getText().isEmpty()) {
             alert = new Alert(Alert.AlertType.ERROR);
