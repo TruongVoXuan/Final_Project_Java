@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -74,33 +78,95 @@
                      <children>
                         <AnchorPane layoutX="256.0" layoutY="131.0" prefHeight="600.0" prefWidth="864.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="15.0" layoutY="14.0" prefHeight="160.0" prefWidth="833.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
+                              <AnchorPane layoutX="16.0" layoutY="14.0" prefHeight="160.0" prefWidth="836.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
                                  <styleClass>
                                     <String fx:value="white_bg" />
                                     <String fx:value="shadow" />
                                     <String fx:value="radius" />
                                  </styleClass>
                                  <children>
-                                    <ScrollPane layoutX="253.0" layoutY="-20.0" prefHeight="180.0" prefWidth="833.6" styleClass="transparent" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ScrollPane layoutX="-56.8" layoutY="-20.0" prefHeight="180.0" prefWidth="899.0" styleClass="transparent" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <AnchorPane prefHeight="148.0" prefWidth="1062.0">
+                                          <AnchorPane prefHeight="148.0" prefWidth="1100.0">
                                              <children>
-                                                <AnchorPane layoutX="24.0" layoutY="17.0" prefHeight="114.0" prefWidth="190.0" styleClass="nav-form" stylesheets="@../CSS/mainFormDesgin.css">
+                                                <AnchorPane layoutX="39.0" layoutY="17.0" prefHeight="114.0" prefWidth="274.0" styleClass="nav-form" stylesheets="@../CSS/mainFormDesgin.css">
                                                    <children>
-                                                      <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="14.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="72.0" fitWidth="97.0" layoutX="38.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../Images/user.png" />
                                                          </image>
                                                       </ImageView>
-                                                      <Label layoutX="78.0" layoutY="80.0" prefHeight="22.0" prefWidth="108.0" text="Số lượng khách ">
+                                                      <Label layoutX="78.0" layoutY="80.0" prefHeight="26.0" prefWidth="119.0" text="Số lượng khách " AnchorPane.rightAnchor="5.0">
                                                          <font>
-                                                            <Font size="15.0" />
+                                                            <Font size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" />
+                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
                                                    </children>
                                                 </AnchorPane>
-                                             </children></AnchorPane>
+                                                <AnchorPane layoutX="341.0" layoutY="17.0" prefHeight="114.0" prefWidth="274.0" styleClass="nav-form" stylesheets="@../CSS/mainFormDesgin.css">
+                                                   <children>
+                                                      <ImageView fitHeight="72.0" fitWidth="97.0" layoutX="38.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Images/coin.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label layoutX="78.0" layoutY="80.0" prefHeight="26.0" prefWidth="138.0" text="Thu nhập hôm nay" AnchorPane.rightAnchor="5.0">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="648.0" layoutY="17.0" prefHeight="114.0" prefWidth="274.0" styleClass="nav-form" stylesheets="@../CSS/mainFormDesgin.css">
+                                                   <children>
+                                                      <ImageView fitHeight="72.0" fitWidth="97.0" layoutX="38.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Images/money-bag.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label layoutX="78.0" layoutY="80.0" prefHeight="26.0" prefWidth="119.0" text="Tổng thu nhập" AnchorPane.rightAnchor="5.0">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="958.0" layoutY="17.0" prefHeight="114.0" prefWidth="274.0" styleClass="nav-form" stylesheets="@../CSS/mainFormDesgin.css">
+                                                   <children>
+                                                      <ImageView fitHeight="72.0" fitWidth="97.0" layoutX="38.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../Images/shopping-cart.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label layoutX="78.0" layoutY="80.0" prefHeight="26.0" prefWidth="148.0" text="Sản phẩm bán được" AnchorPane.rightAnchor="5.0">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
                                        </content>
                                     </ScrollPane>
                                  </children>
@@ -111,6 +177,42 @@
                                     <String fx:value="shadow" />
                                     <String fx:value="radius" />
                                  </styleClass>
+                                 <children>
+                                    <AnchorPane layoutX="23.0" layoutY="21.0" prefHeight="354.0" prefWidth="424.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="18.0">
+                                       <styleClass>
+                                          <String fx:value="white_bg" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                       <children>
+                                          <AreaChart layoutX="-18.0" layoutY="-23.0" prefHeight="377.6" prefWidth="441.0" title="Thu nhập ngày hôm nay" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <xAxis>
+                                              <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                          </AreaChart>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="503.0" layoutY="21.0" prefHeight="350.0" prefWidth="310.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.bottomAnchor="20.80000000000001" AnchorPane.rightAnchor="20.999999999999886" AnchorPane.topAnchor="21.0">
+                                       <styleClass>
+                                          <String fx:value="white_bg" />
+                                          <String fx:value="shadow" />
+                                          <String fx:value="radius" />
+                                       </styleClass>
+                                       <children>
+                                          <BarChart layoutX="-140.0" layoutY="-76.0" prefHeight="350.4" prefWidth="360.0" title="Số lượng khách hàng" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <xAxis>
+                                              <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                          </BarChart>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
                               </AnchorPane>
                               <Separator layoutX="27.0" layoutY="186.0" prefHeight="2.0" prefWidth="810.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="27.199999999999932" AnchorPane.topAnchor="186.0" />
                            </children>
