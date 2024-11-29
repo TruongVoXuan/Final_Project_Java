@@ -1,0 +1,37 @@
+.header {
+        -fx-background-color:  linear-gradient(to bottom right, #098c53, #4ea476);
+}
+
+.nav-form {
+  -fx-background-color: linear-gradient(to bottom right, #3979a6, #4d8c7e);
+}
+
+.nav-btn{
+-fx-background-color: transparent;
+-fx-border-color: #fff;
+-fx-border-width: .5px;
+-fx-cursor: hand;
+-fx-text-fill: #fff;
+-fx-font-size: 14px;
+}
+
+.nav-btn:hover{
+ -fx-background-color: #fff;
+ -fx-text-fill: #000;
+}
+
+.logout{
+-fx-background-color:#a13737
+-fx-padding: 5px;
+-fx-cursor: hand;
+-fx-background-radius: 50px;
+}
+
+.logout:hover {
+-fx-background-color:#a13737
+}
+
+.shadow{
+-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+
+}
