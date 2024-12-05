@@ -5,12 +5,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import truongvx.wheyshopmanagement.utils.database;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -140,6 +145,22 @@ public class WheyShopController implements Initializable {
                         alert.setHeaderText(null);
                         alert.setContentText("Đăng nhập thành công");
                         alert.showAndWait();
+
+                        // KET NOI VS MAINfORM/ CHUYEN MAN HINH KHI DANG NHAP THANH CONG
+                        Parent root = FXMLLoader.load(getClass().getResource("/truongvx/wheyshopmanagement/fxml/mainForm.fxml"));
+
+                        Stage stage = new Stage();
+                        Scene scene = new Scene(root);
+
+                        stage.setTitle("Hệ thống quản lý bán hàng Whey Shop");
+                        stage.setMinHeight(600);
+                        stage.setMinWidth(1100);
+
+                        stage.setScene(scene);
+                        stage.show();
+
+                        si_loginBtn.getScene().getWindow().hide();
+
                     } else {
                         alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Database Connection Error");
@@ -154,9 +175,15 @@ public class WheyShopController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("Lỗi khi kết nối cơ sở dữ liệu.");
                     alert.showAndWait();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("File Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Lỗi khi tải tệp FXML.");
+                    alert.showAndWait();
                 }
             } else {
-
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Information Message");
                 alert.setHeaderText(null);

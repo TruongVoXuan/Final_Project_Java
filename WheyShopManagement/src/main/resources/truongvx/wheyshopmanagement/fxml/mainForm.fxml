@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -32,7 +32,12 @@
                            <children>
                               <AnchorPane layoutX="18.0" layoutY="81.0" prefHeight="101.0" prefWidth="235.0" styleClass="header" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label layoutX="7.0" layoutY="40.0" text="Whey Shop Managerment System" textFill="WHITE">
+                                    <Label layoutX="80.0" layoutY="59.0" text="Whey Shop" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="33.0" layoutY="31.0" text="Hệ thống quản lý bán hàng" textFill="WHITE">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
