@@ -263,31 +263,31 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="180.0" layoutY="41.0" prefHeight="26.0" prefWidth="113.0" />
+                                    <TextField fx:id="inventory_productID" layoutX="180.0" layoutY="41.0" prefHeight="26.0" prefWidth="113.0" />
                                     <Label layoutX="78.0" layoutY="89.0" text="Tên sản phẩm:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="180.0" layoutY="86.0" prefHeight="26.0" prefWidth="160.0" />
+                                    <TextField fx:id="inventory_productName" layoutX="180.0" layoutY="86.0" prefHeight="26.0" prefWidth="160.0" />
                                     <Label layoutX="139.0" layoutY="137.0" text="Loại:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox layoutX="180.0" layoutY="134.0" prefWidth="160.0" promptText="Loại sản phẩm..." />
+                                    <ComboBox fx:id="inventory_type" layoutX="180.0" layoutY="134.0" prefWidth="160.0" promptText="Loại sản phẩm..." />
                                     <Label layoutX="325.0" layoutY="43.0" text="Số lượng trong kho:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="456.0" layoutY="40.0" prefHeight="26.0" prefWidth="160.0" promptText="0" />
+                                    <TextField fx:id="inventory_stock" layoutX="456.0" layoutY="40.0" prefHeight="26.0" prefWidth="160.0" promptText="0" />
                                     <Label layoutX="425.0" layoutY="88.0" text="Giá:">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="456.0" layoutY="85.0" prefHeight="26.0" prefWidth="160.0" promptText="0.0" />
+                                    <TextField fx:id="inventory_price" layoutX="456.0" layoutY="85.0" prefHeight="26.0" prefWidth="160.0" promptText="0.0" />
                                     <AnchorPane layoutX="686.0" layoutY="44.0" prefHeight="117.0" prefWidth="120.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.rightAnchor="35.59999999999991">
                                        <styleClass>
                                           <String fx:value="white_bg" />
@@ -307,7 +307,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox layoutX="460.0" layoutY="132.0" prefHeight="26.0" prefWidth="157.0" promptText="Trạng thái..." />
+                                    <ComboBox fx:id="inventory_status" layoutX="460.0" layoutY="132.0" prefHeight="26.0" prefWidth="157.0" promptText="Trạng thái..." />
                                  </children>
                               </AnchorPane>
                               <Separator layoutX="13.0" layoutY="275.0" prefHeight="1.0" prefWidth="838.0" AnchorPane.bottomAnchor="321.8" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="14.199999999999932" />

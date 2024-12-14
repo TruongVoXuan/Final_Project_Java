@@ -1,5 +1,7 @@
 package truongvx.wheyshopmanagement.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +14,8 @@ import javafx.stage.Stage;
 import truongvx.wheyshopmanagement.utils.data;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -65,6 +69,21 @@ public class mainFormController  implements Initializable {
   private AnchorPane inventory_form;
 
   @FXML
+  private TextField inventory_price;
+
+  @FXML
+  private TextField inventory_productID;
+
+  @FXML
+  private TextField inventory_productName;
+
+  @FXML
+  private ComboBox<?> inventory_status;
+
+  @FXML
+  private TextField inventory_stock;
+
+  @FXML
   private TableView<?> inventory_tableView;
 
   @FXML
@@ -82,7 +101,24 @@ public class mainFormController  implements Initializable {
   @FXML
   private Label username;
 
+  @FXML
+  private ComboBox<?> inventory_type;
+
   private Alert alert;
+
+  private  String[] typeList = {"Vitamin","Protein"};
+  public  void inventoryTypeList() {
+
+    List<String> typeL = new ArrayList<>();
+
+    for(String data:typeList){
+      typeL.add(data);
+    }
+
+    ObservableList listData = FXCollections.observableArrayList(typeL);
+
+    inventory_type.setItems(listData);
+  }
 
 
   public void logout() {
@@ -122,6 +158,6 @@ public class mainFormController  implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
     displayUsername();
-
+    inventoryTypeList();
   }
 }
