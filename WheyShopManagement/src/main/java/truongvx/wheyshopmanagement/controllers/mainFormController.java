@@ -8,12 +8,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import truongvx.wheyshopmanagement.utils.data;
+import truongvx.wheyshopmanagement.utils.database;
+import truongvx.wheyshopmanagement.utils.productData;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,22 +52,22 @@ public class mainFormController  implements Initializable {
   private Button inventory_col_importBtn;
 
   @FXML
-  private TableColumn<?, ?> inventory_col_price;
+  private TableColumn<productData, String> inventory_col_price;
 
   @FXML
-  private TableColumn<?, ?> inventory_col_productID;
+  private TableColumn<productData, String> inventory_col_productID;
 
   @FXML
-  private TableColumn<?, ?> inventory_col_productName;
+  private TableColumn<productData, String> inventory_col_productName;
 
   @FXML
-  private TableColumn<?, ?> inventory_col_status;
+  private TableColumn<productData, String> inventory_col_status;
 
   @FXML
-  private TableColumn<?, ?> inventory_col_stock;
+  private TableColumn<productData, String> inventory_col_stock;
 
   @FXML
-  private TableColumn<?, ?> inventory_col_type;
+  private TableColumn<productData, String> inventory_col_type;
 
   @FXML
   private Button inventory_deleteBtn;
@@ -84,7 +91,7 @@ public class mainFormController  implements Initializable {
   private TextField inventory_stock;
 
   @FXML
-  private TableView<?> inventory_tableView;
+  private TableView<productData> inventory_tableView;
 
   @FXML
   private Button inventory_updateBtn;
@@ -105,6 +112,52 @@ public class mainFormController  implements Initializable {
   private ComboBox<?> inventory_type;
 
   private Alert alert;
+
+  private Connection connect;
+  private PreparedStatement prepare;
+  private Statement statement;
+  private ResultSet result;
+
+
+
+  public  ObservableList<productData> inventoryDataList() {
+    ObservableList<productData> listData = FXCollections.observableArrayList();
+
+    String sql = "SELECT * FROM product";
+
+    connect = database.connectDB();
+    try {
+          prepare = connect.prepareStatement(sql);
+          result = prepare.executeQuery();
+
+          productData prodData;
+
+          while (result.next()){
+            prodData = new productData(result.getInt("id"), result.getString("prod_id"),result.getString("prod_name"),result.getString("type"),result.getInt("stock"), result.getDouble("price"),result.getString("status"),result.getString("image"),result.getDate("date"));
+
+            listData.add(prodData);
+          }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return listData;
+  }
+
+  private  ObservableList<productData> inventoryListData;
+
+  public  void inventoryShowData() {
+    inventoryListData = inventoryDataList();
+    inventory_col_productID.setCellValueFactory(new PropertyValueFactory<>("productId"));
+    inventory_col_productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+    inventory_col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+    inventory_col_stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+    inventory_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+    inventory_col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+    inventory_col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+    inventory_tableView.setItems(inventoryListData);
+  }
 
   private  String[] typeList = {"Vitamin","Protein"};
   public  void inventoryTypeList() {
@@ -171,5 +224,6 @@ public class mainFormController  implements Initializable {
     displayUsername();
     inventoryTypeList();
     inventoryStatusList();
+    inventoryShowData();
   }
 }
