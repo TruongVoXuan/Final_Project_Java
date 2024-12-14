@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import truongvx.wheyshopmanagement.utils.data;
 import truongvx.wheyshopmanagement.utils.database;
 
 import java.io.IOException;
@@ -140,6 +141,10 @@ public class WheyShopController implements Initializable {
                     result = prepare.executeQuery();
                     // IF SUCCESSFULLY LOGIN, THEN PROCEED TO ANOTHER FORM WHICH IS OUR MAIN FORM
                     if (result.next()) {
+                            //Lấy ra tên đăng nhập phù hợp
+                        data.username = si_username.getText();
+
+
                         alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Information Message");
                         alert.setHeaderText(null);
