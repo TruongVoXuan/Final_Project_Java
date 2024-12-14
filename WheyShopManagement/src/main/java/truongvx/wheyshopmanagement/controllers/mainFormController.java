@@ -121,6 +121,17 @@ public class mainFormController  implements Initializable {
   }
 
 
+  private  String[] statusList = {"Còn hàng","Hết hàng"};
+
+  public  void inventoryStatusList() {
+    List<String> statusL = new ArrayList<> ();
+    for (String data: statusList) {
+      statusL.add(data);
+    }
+    ObservableList listData = FXCollections. observableArrayList (statusL) ;
+    inventory_status.setItems (listData);
+  }
+
   public void logout() {
     try {
       alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -159,5 +170,6 @@ public class mainFormController  implements Initializable {
 
     displayUsername();
     inventoryTypeList();
+    inventoryStatusList();
   }
 }
