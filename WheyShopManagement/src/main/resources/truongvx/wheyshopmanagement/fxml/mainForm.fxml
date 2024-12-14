@@ -58,7 +58,7 @@
                               <Button fx:id="inventory_btn" layoutX="12.0" layoutY="271.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHO HÀNG" />
                               <Button fx:id="menu_btn" layoutX="12.0" layoutY="327.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="MENU" />
                               <Button fx:id="customers_btn" layoutX="12.0" layoutY="383.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHÁCH HÀNG" />
-                              <Button fx:id="logout_btn" layoutX="14.0" layoutY="558.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" stylesheets="@../CSS/mainFormDesgin.css" textFill="#403c3c" AnchorPane.bottomAnchor="10.8" AnchorPane.leftAnchor="14.0">
+                              <Button fx:id="logout_btn" layoutX="14.0" layoutY="558.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="26.0" stylesheets="@../CSS/mainFormDesgin.css" textFill="#403c3c" AnchorPane.bottomAnchor="10.8" AnchorPane.leftAnchor="14.0">
                                  <graphic>
                                     <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="logout">
                                        <image>

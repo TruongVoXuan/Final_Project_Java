@@ -1,16 +1,18 @@
 package truongvx.wheyshopmanagement.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import truongvx.wheyshopmanagement.utils.data;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class mainFormController  implements Initializable {
@@ -79,6 +81,36 @@ public class mainFormController  implements Initializable {
 
   @FXML
   private Label username;
+
+  private Alert alert;
+
+
+  public void logout() {
+    try {
+      alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Thông báo lỗi");
+      alert.setHeaderText(null);
+      alert.setContentText("Bạn có chắc chắn muốn thoát?");
+      Optional<ButtonType> option = alert.showAndWait();
+
+      if (option.get().equals(ButtonType.OK)) {
+        // Ẩn form main
+        logout_btn.getScene().getWindow().hide();
+
+        // Sử dụng đường dẫn chính xác đến tệp FXML
+        Parent root = FXMLLoader.load(getClass().getResource("/truongvx/wheyshopmanagement/fxml/login.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+
+        stage.setTitle("Hệ thống quản lý bán hàng WheyShop");
+        stage.setScene(scene);
+        stage.show();
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
   public  void displayUsername() {
       String user = data.username;
