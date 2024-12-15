@@ -235,7 +235,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="inventory_tableView" layoutX="12.0" layoutY="9.0" prefHeight="234.0" prefWidth="819.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="10.200000000000017" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.199999999999818" AnchorPane.topAnchor="8.800000000000011">
+                                    <TableView fx:id="inventory_tableView" layoutX="12.0" layoutY="9.0" onMouseClicked="#inventorySelectData" prefHeight="234.0" prefWidth="819.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="10.200000000000017" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="11.199999999999818" AnchorPane.topAnchor="8.800000000000011">
                                       <columns>
                                         <TableColumn fx:id="inventory_col_productID" prefWidth="96.80005550384521" text="Mã sản phẩm" />
                                         <TableColumn fx:id="inventory_col_productName" prefWidth="94.4000244140625" text="Tên sản phẩm" />

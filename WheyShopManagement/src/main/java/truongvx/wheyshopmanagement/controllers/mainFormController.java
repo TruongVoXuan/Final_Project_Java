@@ -265,6 +265,24 @@ public class mainFormController  implements Initializable {
     inventory_tableView.setItems(inventoryListData);
   }
 
+  public  void inventorySelectData() {
+    productData prodData =inventory_tableView.getSelectionModel().getSelectedItem();
+    int num = inventory_tableView.getSelectionModel().getSelectedIndex();
+
+    if((num -1) < -1) return;
+
+    inventory_productID.setText(prodData.getProductId());
+    inventory_productName.setText(prodData.getProductName());
+    inventory_stock.setText (String.valueOf(prodData.getStock()));
+    inventory_price.setText (String.valueOf(prodData.getPrice()));
+
+    data.path = "File:" + prodData.getImage ();
+
+    image = new Image(data.path, 120, 134, false, true);
+
+    inventory_ImageView.setImage(image);
+  }
+
   private  String[] typeList = {"Vitamin","Protein"};
   public  void inventoryTypeList() {
 
