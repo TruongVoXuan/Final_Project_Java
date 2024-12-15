@@ -294,10 +294,10 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <ImageView fx:id="inventory_col_ImageView" fitHeight="134.0" fitWidth="120.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.8000000000000114" />
+                                          <ImageView fx:id="inventory_ImageView" fitHeight="134.0" fitWidth="120.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.8000000000000114" />
                                        </children>
                                     </AnchorPane>
-                                    <Button fx:id="inventory_col_importBtn" layoutX="702.0" layoutY="193.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="70.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Nhập" AnchorPane.rightAnchor="69.99999999999989" />
+                                    <Button fx:id="inventory_col_importBtn" layoutX="702.0" layoutY="193.0" mnemonicParsing="false" onAction="#inventoryImportBtn" prefHeight="37.0" prefWidth="70.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Nhập" AnchorPane.rightAnchor="69.99999999999989" />
                                     <Button fx:id="inventory_addBtn" layoutX="218.0" layoutY="231.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Thêm" AnchorPane.bottomAnchor="37.0" />
                                     <Button fx:id="inventory_updateBtn" layoutX="317.0" layoutY="231.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="81.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Cập nhập" AnchorPane.bottomAnchor="37.0" />
                                     <Button fx:id="inventory_deleteBtn" layoutX="536.0" layoutY="231.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="87.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Xóa tất cả" AnchorPane.bottomAnchor="37.0" />

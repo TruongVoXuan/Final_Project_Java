@@ -9,13 +9,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import truongvx.wheyshopmanagement.utils.data;
 import truongvx.wheyshopmanagement.utils.database;
 import truongvx.wheyshopmanagement.utils.productData;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,7 +46,7 @@ public class mainFormController  implements Initializable {
   private Button inventory_clearBtn;
 
   @FXML
-  private ImageView inventory_col_ImageView;
+  private ImageView inventory_ImageView;
 
   @FXML
   private TableColumn<?, ?> inventory_col_date;
@@ -118,6 +121,29 @@ public class mainFormController  implements Initializable {
   private Statement statement;
   private ResultSet result;
 
+  private Image image;
+
+  public  void inventoryAddBtn() {
+    if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null){
+
+
+    }
+  }
+
+
+
+  public  void inventoryImportBtn(){
+    FileChooser openFile =  new FileChooser();
+    openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File","*png","*jpg"));
+    File file = openFile.showOpenDialog(main_form.getScene().getWindow());
+
+    if( file != null){
+      data.path= file.getAbsolutePath();
+      image = new Image(file.toURI().toString(), 120, 134, false, true);
+
+      inventory_ImageView.setImage(image);
+    }
+  }
 
 
   public  ObservableList<productData> inventoryDataList() {
@@ -144,8 +170,9 @@ public class mainFormController  implements Initializable {
     return listData;
   }
 
-  private  ObservableList<productData> inventoryListData;
 
+  //Hiển thị data lên table
+  private  ObservableList<productData> inventoryListData;
   public  void inventoryShowData() {
     inventoryListData = inventoryDataList();
     inventory_col_productID.setCellValueFactory(new PropertyValueFactory<>("productId"));
