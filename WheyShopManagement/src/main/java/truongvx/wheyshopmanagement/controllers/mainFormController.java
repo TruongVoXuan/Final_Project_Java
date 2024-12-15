@@ -24,10 +24,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class mainFormController  implements Initializable {
   @FXML
@@ -127,7 +124,89 @@ public class mainFormController  implements Initializable {
     if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null){
 
 
+      alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Thông báo lỗi");
+      alert.setHeaderText (null);
+      alert.setContentText ("Vui nhập nhập đầy đủ các trường!");
+      alert.showAndWait ();
+
+
+
     }
+    else {
+      String checkProdID = "SELECT prod_id FROM product WHERE prod_id = '"
+          + inventory_productID.getText() +"'";
+
+      connect = database.connectDB();
+
+      try {
+
+        statement = connect.createStatement();
+        result = statement.executeQuery(checkProdID);
+
+        if(result.next())
+        {
+          alert = new Alert(Alert.AlertType.ERROR);
+          alert.setTitle ("Error Message");
+          alert.setHeaderText (null);
+          alert.setContentText (inventory_productID.getText () + " đã có sẵn");
+          alert.showAndWait();
+        }
+        else {
+          String insertData = "INSERT INTO product "
+              + "(prod_id,prod_name,type,stock,price,status,image,date) "
+              +   "VALUES(?,?,?,?,?,?,?,?)";
+
+          prepare = connect.prepareStatement(insertData);
+
+          prepare.setString(1,inventory_productID.getText());
+          prepare.setString(2,inventory_productName.getText());
+          prepare.setString(3,(String) inventory_type.getSelectionModel().getSelectedItem());
+          prepare.setString(4,inventory_stock.getText());
+          prepare.setString(5, inventory_price.getText ());
+          prepare.setString(6, (String) inventory_status.getSelectionModel() .getSelectedItem());
+
+          String path = data.path;
+          path = path.replace("\\", "\\\\");
+
+          prepare.setString(7,path);
+
+
+          //Láy ngày hiện tại
+          Date date = new Date();
+          java.sql.Date sqlDate = new  java.sql.Date(date.getTime());
+
+
+          prepare.setString(8, String.valueOf(sqlDate));
+
+          prepare.executeUpdate();
+
+          alert = new Alert (Alert.AlertType. INFORMATION) ;
+          alert.setTitle("Error Message");
+          alert.setHeaderText (null);
+          alert.setContentText ("THÊM THÀNH CÔNG!");
+          alert.showAndWait ();
+
+          inventoryShowData();
+          inventoryClearBtn();
+        }
+
+
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public  void inventoryClearBtn() {
+    inventory_productID.setText("");
+    inventory_productName.setText ("");
+    inventory_type.getSelectionModel() .clearSelection();
+    inventory_stock.setText ("");
+    inventory_price.setText ("");
+    inventory_status.getSelectionModel() .clearSelection();
+    data.path = "";
+    inventory_ImageView.setImage(null);
   }
 
 
