@@ -121,19 +121,19 @@ public class mainFormController  implements Initializable {
   private Image image;
 
   public  void inventoryAddBtn() {
-    if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null){
+      if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null){
 
 
-      alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Thông báo lỗi");
-      alert.setHeaderText (null);
-      alert.setContentText ("Vui nhập nhập đầy đủ các trường!");
-      alert.showAndWait ();
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Thông báo lỗi");
+        alert.setHeaderText (null);
+        alert.setContentText ("Vui nhập nhập đầy đủ các trường!");
+        alert.showAndWait ();
 
 
 
-    }
-    else {
+      }
+      else {
       String checkProdID = "SELECT prod_id FROM product WHERE prod_id = '"
           + inventory_productID.getText() +"'";
 
@@ -198,6 +198,69 @@ public class mainFormController  implements Initializable {
     }
   }
 
+
+  public  void inventoryUpdateBtn(){
+    if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null ||data.id==0){
+
+
+      alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Thông báo lỗi");
+      alert.setHeaderText (null);
+      alert.setContentText ("Vui nhập nhập đầy đủ các trường!");
+      alert.showAndWait ();
+
+
+
+    }
+    else {
+
+      String path = data.path;
+      path = path.replace ("\\", "\\\\");
+
+        String updateData= "UPDATE product SET  "
+            + "prod_id = '" + inventory_productID.getText() + "', prod_name = '" +inventory_productName.getText() + "',type = '" + inventory_type.getSelectionModel().getSelectedItem() + "', stock = '" + inventory_stock.getText() + "', price = '" + inventory_price.getText() + "', status ='"+ inventory_status.getSelectionModel().getSelectedItem() +"', image = '" + path + "', date = '" +data.date + "' WHERE id = " + data.id;
+
+
+        connect = database.connectDB();
+        try {
+
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+          alert.setTitle("Error Message");
+          alert.setHeaderText (null);
+          alert.setContentText ("Xác nhận cập nhập id: " + inventory_productID.getText() );
+        Optional<ButtonType> option =  alert.showAndWait();
+
+        if(option.get().equals(ButtonType.OK))
+        {
+          prepare = connect.prepareStatement(updateData);
+          prepare.executeUpdate();
+
+          alert = new Alert(Alert.AlertType.INFORMATION);
+          alert.setTitle("Error Message") ;
+          alert.setHeaderText (null);
+          alert.setContentText ("Cập nhập thành công!");
+          alert.showAndWait ();
+
+          //update table view lại
+          inventoryShowData();
+          //xóa các trường
+          inventoryClearBtn();
+        }
+        else {
+          alert = new Alert (Alert.AlertType. ERROR) ;
+          alert.setTitle("Error Message") ;
+          alert.setHeaderText (null);
+          alert.setContentText ("Cancelled.");
+          alert.showAndWait ();
+        }
+
+
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+    }
+  }
+
   public  void inventoryClearBtn() {
     inventory_productID.setText("");
     inventory_productName.setText ("");
@@ -206,6 +269,7 @@ public class mainFormController  implements Initializable {
     inventory_price.setText ("");
     inventory_status.getSelectionModel() .clearSelection();
     data.path = "";
+    data.id=0;
     inventory_ImageView.setImage(null);
   }
 
@@ -276,7 +340,11 @@ public class mainFormController  implements Initializable {
     inventory_stock.setText (String.valueOf(prodData.getStock()));
     inventory_price.setText (String.valueOf(prodData.getPrice()));
 
-    data.path = "File:" + prodData.getImage ();
+   data.path = prodData.getImage();
+
+    String path = "File:" + prodData.getImage ();
+    data.date = String.valueOf(prodData.getDate());
+    data.id = prodData.getId();
 
     image = new Image(data.path, 120, 134, false, true);
 
