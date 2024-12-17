@@ -273,7 +273,56 @@ public class mainFormController  implements Initializable {
     inventory_ImageView.setImage(null);
   }
 
+  public  void inventory_DeleteBtn() {
+    if(data.id==0){
 
+
+      alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Thông báo lỗi");
+      alert.setHeaderText (null);
+      alert.setContentText ("Vui nhập nhập đầy đủ các trường!");
+      alert.showAndWait ();
+
+
+
+    }
+    else {
+      alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Thông báo lỗi");
+      alert.setHeaderText (null);
+      alert.setContentText ("Xác nhận xóa sản phẩm có id " + inventory_productID.getText());
+      Optional<ButtonType> option = alert.showAndWait();
+      if(option.get().equals(ButtonType.OK))
+      {
+        String deleteData = "DELETE FROM product WHERE id = " + data.id;
+
+        try {
+            prepare = connect.prepareStatement(deleteData);
+            prepare.executeUpdate();
+
+
+            alert =new Alert(Alert.AlertType.ERROR);
+          alert.setTitle("Error Message");
+          alert.setHeaderText (null);
+          alert.setContentText ("Xóa thành công!");
+
+          inventoryShowData();
+          inventoryClearBtn();
+
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+      else {
+            alert=new Alert(Alert.AlertType.ERROR);
+        alert.setTitle ("Error Message");
+        alert.setHeaderText (null);
+        alert.setContentText ("Cancelled");
+        alert.showAndWait();
+      }
+
+    }
+  }
 
   public  void inventoryImportBtn(){
     FileChooser openFile =  new FileChooser();
