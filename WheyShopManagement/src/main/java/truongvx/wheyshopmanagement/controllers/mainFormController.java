@@ -2,9 +2,11 @@ package truongvx.wheyshopmanagement.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -81,6 +83,9 @@ public class mainFormController  implements Initializable {
 
   @FXML
   private TextField inventory_productID;
+  @FXML
+  private AnchorPane dashboard_form;
+
 
   @FXML
   private TextField inventory_productName;
@@ -163,7 +168,7 @@ public class mainFormController  implements Initializable {
   private Image image;
 
 
-  private  ObservableList<productData> cardListData;
+  private  ObservableList<productData> cardListData = FXCollections.observableArrayList();
 
 
   public  void inventoryAddBtn() {
@@ -475,8 +480,97 @@ public class mainFormController  implements Initializable {
 
 
   public  ObservableList<productData> menuGetData() {
-    return  cardListData;
+
+    String sql ="SELECT * FROM product";
+
+
+    ObservableList<productData> listData = FXCollections.observableArrayList();
+    connect = database.connectDB();
+
+    try {
+      prepare = connect.prepareStatement(sql);
+      result = prepare.executeQuery();
+
+      productData prod ;
+      while (result.next())
+      {
+        prod = new productData(result.getInt("id"), result.getString("prod_id"), result.getString("prod_name"), result.getDouble("price"), result.getString("image"));
+
+        listData.add(prod);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return  listData;
   }
+
+
+  public  void menuDisplayCard()
+  {
+    cardListData.clear();
+    cardListData.addAll(menuGetData());
+
+    int row=0;
+    int column =0;
+
+    menu_gridPane.getRowConstraints().clear();
+    menu_gridPane.getColumnConstraints().clear();
+
+    for ( int q=0 ;q < cardListData.size(); q++){
+
+      try {
+        FXMLLoader load = new FXMLLoader();
+        load.setLocation(getClass().getResource("/truongvx/wheyshopmanagement/fxml/cardProduct.fxml"));
+        AnchorPane pane = load.load();
+       cardProductController cardC = load .getController();
+       cardC.setData(cardListData.get(q));
+
+       if(column ==3) {
+         column=0;
+         row = row+1;
+       }
+
+       menu_gridPane.add(pane,column++,row);
+
+      GridPane.setMargin(pane, new Insets(10));
+
+
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+
+  public  void switchForm(ActionEvent event){
+    if(event.getSource() == dashboard_btn)
+    {
+      dashboard_form.setVisible(true);
+      inventory_form.setVisible(false);
+      menu_form.setVisible(false);
+
+
+    }
+    else  if (event.getSource() == inventory_btn){
+      dashboard_form.setVisible(false);
+      inventory_form.setVisible(true);
+      menu_form.setVisible(false);
+
+      inventoryTypeList();
+      inventoryStatusList();
+      inventoryShowData();
+    }
+    else  if (event.getSource() == menu_btn){
+      dashboard_form.setVisible(false);
+      inventory_form.setVisible(false);
+      menu_form.setVisible(true);
+
+      menuDisplayCard();
+    }
+  }
+
 
   public void logout() {
     try {
@@ -518,5 +612,6 @@ public class mainFormController  implements Initializable {
     inventoryTypeList();
     inventoryStatusList();
     inventoryShowData();
+    menuDisplayCard();
   }
 }

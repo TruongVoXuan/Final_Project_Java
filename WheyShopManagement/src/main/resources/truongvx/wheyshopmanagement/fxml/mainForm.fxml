@@ -56,9 +56,9 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="dashboard_btn" layoutX="12.0" layoutY="214.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="TỔNG QUAN" />
-                              <Button fx:id="inventory_btn" layoutX="12.0" layoutY="271.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHO HÀNG" />
-                              <Button fx:id="menu_btn" layoutX="12.0" layoutY="327.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="MENU" />
+                              <Button fx:id="dashboard_btn" layoutX="12.0" layoutY="214.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="TỔNG QUAN" />
+                              <Button fx:id="inventory_btn" layoutX="12.0" layoutY="271.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHO HÀNG" />
+                              <Button fx:id="menu_btn" layoutX="12.0" layoutY="327.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="MENU" />
                               <Button fx:id="customers_btn" layoutX="12.0" layoutY="383.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHÁCH HÀNG" />
                               <Button fx:id="logout_btn" layoutX="14.0" layoutY="558.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="26.0" stylesheets="@../CSS/mainFormDesgin.css" textFill="#403c3c" AnchorPane.bottomAnchor="10.8" AnchorPane.leftAnchor="14.0">
                                  <graphic>
@@ -87,7 +87,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutX="256.0" layoutY="131.0" prefHeight="600.0" prefWidth="864.8" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="dashboard_form" layoutX="256.0" layoutY="131.0" prefHeight="600.0" prefWidth="864.8" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="16.0" layoutY="14.0" prefHeight="160.0" prefWidth="836.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
                                  <styleClass>
