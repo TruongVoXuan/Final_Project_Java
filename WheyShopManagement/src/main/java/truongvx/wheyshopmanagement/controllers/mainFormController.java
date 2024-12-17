@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import truongvx.wheyshopmanagement.utils.data;
@@ -111,6 +112,47 @@ public class mainFormController  implements Initializable {
   @FXML
   private ComboBox<?> inventory_type;
 
+  @FXML
+  private TextField menu_amount;
+
+
+  @FXML
+  private Label menu_change;
+
+  @FXML
+  private TableColumn<?, ?> menu_col_price;
+
+  @FXML
+  private TableColumn<?, ?> menu_col_productName;
+
+  @FXML
+  private TableColumn<?, ?> menu_col_quantity;
+
+  @FXML
+  private AnchorPane menu_form;
+
+  @FXML
+  private GridPane menu_gridPane;
+
+  @FXML
+  private Button menu_payBtn;
+
+  @FXML
+  private Button menu_receiptBtn;
+
+  @FXML
+  private Button menu_removeBtn;
+
+  @FXML
+  private ScrollPane menu_scrollPane;
+
+  @FXML
+  private TableView<?> menu_tableView;
+
+  @FXML
+  private Label menu_total;
+
+
   private Alert alert;
 
   private Connection connect;
@@ -119,6 +161,10 @@ public class mainFormController  implements Initializable {
   private ResultSet result;
 
   private Image image;
+
+
+  private  ObservableList<productData> cardListData;
+
 
   public  void inventoryAddBtn() {
       if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null){
@@ -305,6 +351,7 @@ public class mainFormController  implements Initializable {
           alert.setTitle("Error Message");
           alert.setHeaderText (null);
           alert.setContentText ("Xóa thành công!");
+          alert.showAndWait();
 
           inventoryShowData();
           inventoryClearBtn();
@@ -424,6 +471,11 @@ public class mainFormController  implements Initializable {
     }
     ObservableList listData = FXCollections. observableArrayList (statusL) ;
     inventory_status.setItems (listData);
+  }
+
+
+  public  ObservableList<productData> menuGetData() {
+    return  cardListData;
   }
 
   public void logout() {
