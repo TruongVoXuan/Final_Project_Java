@@ -514,7 +514,7 @@ public class mainFormController  implements Initializable {
 
     int row=0;
     int column =0;
-
+    menu_gridPane.getChildren().clear();
     menu_gridPane.getRowConstraints().clear();
     menu_gridPane.getColumnConstraints().clear();
 

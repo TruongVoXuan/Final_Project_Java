@@ -345,7 +345,7 @@
                                     <TableView fx:id="menu_tableView" layoutX="9.0" layoutY="14.0" prefHeight="264.0" prefWidth="263.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="5.600000000000023" AnchorPane.topAnchor="14.0">
                                       <columns>
                                         <TableColumn fx:id="menu_col_productName" prefWidth="105.599853515625" text="Tên Sản Phẩm" />
-                                        <TableColumn fx:id="menu_col_quantity" prefWidth="79.199951171875" text="Chất Lượng" />
+                                        <TableColumn fx:id="menu_col_quantity" prefWidth="79.199951171875" text="Số Lượng" />
                                           <TableColumn fx:id="menu_col_price" prefWidth="73.60015869140625" text="Giá" />
                                       </columns>
                                     </TableView>
