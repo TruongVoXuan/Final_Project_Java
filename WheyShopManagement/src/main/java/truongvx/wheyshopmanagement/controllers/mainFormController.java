@@ -125,13 +125,13 @@ public class mainFormController  implements Initializable {
   private Label menu_change;
 
   @FXML
-  private TableColumn<?, ?> menu_col_price;
+  private TableColumn<productData, String> menu_col_price;
 
   @FXML
-  private TableColumn<?, ?> menu_col_productName;
+  private TableColumn<productData, String> menu_col_productName;
 
   @FXML
-  private TableColumn<?, ?> menu_col_quantity;
+  private TableColumn<productData, String> menu_col_quantity;
 
   @FXML
   private AnchorPane menu_form;
@@ -152,7 +152,7 @@ public class mainFormController  implements Initializable {
   private ScrollPane menu_scrollPane;
 
   @FXML
-  private TableView<?> menu_tableView;
+  private TableView<productData> menu_tableView;
 
   @FXML
   private Label menu_total;
@@ -494,7 +494,7 @@ public class mainFormController  implements Initializable {
       productData prod ;
       while (result.next())
       {
-        prod = new productData(result.getInt("id"), result.getString("prod_id"), result.getString("prod_name"),result.getString("type"), result.getDouble("price"), result.getString("image"), result.getDate("date"));
+        prod = new productData(result.getInt("id"), result.getString("prod_id"), result.getString("prod_name"),result.getString("type"), result.getInt("stock"), result.getDouble("price"), result.getString("image"), result.getDate("date"));
 
         listData.add(prod);
       }
@@ -505,6 +505,7 @@ public class mainFormController  implements Initializable {
 
     return  listData;
   }
+
 
 
   public  void menuDisplayCard()
@@ -543,7 +544,42 @@ public class mainFormController  implements Initializable {
     }
   }
 
+  public  ObservableList<productData> menuDisplayOrder() {
+      ObservableList<productData> listData = FXCollections.observableArrayList();
+      String sql ="SELECT * FROM customer";
 
+      connect = database.connectDB();
+      try
+      {
+        prepare = connect.prepareStatement (sql);
+        result = prepare.executeQuery () ;
+
+        productData prod;
+
+        while (result.next())
+        {
+          prod = new productData(result.getInt("id"), result.getString("prod_id"),result.getString("prod_name"), result.getString("type"),result.getInt("quantity") ,result.getDouble("price"), result.getString("image"), result.getDate("date"));
+          listData.add(prod);
+        }
+
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      return  listData;
+  }
+
+
+  private ObservableList<productData> menuListData;
+  public void menuShowData () {
+    menuListData = menuDisplayOrder() ;
+
+    menu_col_productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+    menu_col_quantity. setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    menu_col_price.setCellValueFactory(new PropertyValueFactory<> ("price") );
+
+
+    menu_tableView.setItems(cardListData);
+  }
   private  int cID;
   public  void customerID() {
 
@@ -607,6 +643,7 @@ public class mainFormController  implements Initializable {
       menu_form.setVisible(true);
 
       menuDisplayCard();
+      menuDisplayOrder();
     }
   }
 
@@ -652,5 +689,6 @@ public class mainFormController  implements Initializable {
     inventoryStatusList();
     inventoryShowData();
     menuDisplayCard();
+    menuDisplayOrder();
   }
 }
