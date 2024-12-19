@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -181,8 +182,7 @@ public class mainFormController  implements Initializable {
   private TableView<customersData> customers_tableView;
 
 
-  @FXML
-  private BarChart<?, ?> dashboard_CustomerChart;
+
 
   @FXML
   private Label dashboard_NC;
@@ -195,9 +195,10 @@ public class mainFormController  implements Initializable {
 
   @FXML
   private Label dashboard_TotalI;
-
   @FXML
-  private AreaChart<?, ?> dashboard_incomeChart;
+  private BarChart<String, Number> dashboard_CustomerChart;
+  @FXML
+  private AreaChart<String, Number> dashboard_incomeChart;
 
 
 
@@ -278,6 +279,7 @@ public class mainFormController  implements Initializable {
   }
 
   public void dashboardNSP () {
+
     String sql = "SELECT COUNT(quantity) FROM customer";
 
     connect = database.connectDB();
@@ -296,8 +298,38 @@ public class mainFormController  implements Initializable {
     }
   }
 
-  
-
+  public void dashboardIncomeChart() {
+    dashboard_incomeChart.getData().clear();
+    String sql = "SELECT date, SUM(total) FROM receipt GROUP BY date ORDER BY TIMESTAMP(date)";
+    connect = database.connectDB();
+    XYChart.Series<String, Number> chart = new XYChart.Series<>();
+    try {
+      prepare = connect.prepareStatement(sql);
+      result = prepare.executeQuery();
+      while (result.next()) {
+        chart.getData().add(new XYChart.Data<>(result.getString(1), result.getFloat(2)));
+      }
+      dashboard_incomeChart.getData().add(chart);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  public void dashboardCustomerChart() {
+    dashboard_CustomerChart.getData().clear();
+    String sql = "SELECT date, COUNT(id) FROM receipt GROUP BY date ORDER BY TIMESTAMP(date)";
+    connect = database.connectDB();
+    XYChart.Series<String, Number> chart = new XYChart.Series<>();
+    try {
+      prepare = connect.prepareStatement(sql);
+      result = prepare.executeQuery();
+      while (result.next()) {
+        chart.getData().add(new XYChart.Data<>(result.getString(1), result.getInt(2)));
+      }
+      dashboard_CustomerChart.getData().add(chart);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
   public  void inventoryAddBtn() {
       if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null){
 
@@ -941,6 +973,8 @@ public class mainFormController  implements Initializable {
       dashboardDisplayTI();
       dashboardTotalI();
       dashboardNSP();
+      dashboardIncomeChart();
+      dashboardCustomerChart();
 
     }
     else  if (event.getSource() == inventory_btn){
@@ -1060,6 +1094,8 @@ public class mainFormController  implements Initializable {
     dashboardDisplayTI();
     dashboardTotalI();
     dashboardNSP();
+    dashboardIncomeChart();
+    dashboardCustomerChart();
 
     inventoryTypeList();
     inventoryStatusList();
