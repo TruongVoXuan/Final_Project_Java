@@ -364,7 +364,7 @@
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="menu_amount" layoutX="161.0" layoutY="317.0" prefHeight="24.0" prefWidth="102.0" promptText="0" text="\$0.0" AnchorPane.bottomAnchor="235.79999999999998" AnchorPane.rightAnchor="14.200000000000017" />
+                                    <TextField fx:id="menu_amount" layoutX="161.0" layoutY="317.0" onAction="#menuAmount" prefHeight="24.0" prefWidth="102.0" promptText="\$0.0" AnchorPane.bottomAnchor="235.79999999999998" AnchorPane.rightAnchor="14.200000000000017" />
                                     <Label layoutX="83.0" layoutY="357.0" text="Tiền thừa:" AnchorPane.bottomAnchor="199.79999999999998" AnchorPane.rightAnchor="124.80000000000001">
                                        <font>
                                           <Font size="15.0" />

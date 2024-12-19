@@ -544,7 +544,7 @@ public class mainFormController  implements Initializable {
     }
   }
 
-  public  ObservableList<productData> menuDisplayOrder() {
+  public  ObservableList<productData> menuGetOrder() {
       ObservableList<productData> listData = FXCollections.observableArrayList();
       String sql ="SELECT * FROM customer";
 
@@ -567,19 +567,71 @@ public class mainFormController  implements Initializable {
       }
       return  listData;
   }
+  private ObservableList<productData> menuOrderListData;
+  public void menuShowOrderData () {
+    menuOrderListData= menuGetOrder();
+    menu_col_productName.setCellValueFactory (new PropertyValueFactory<> ("productName"));
+    menu_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity") );
+    menu_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-
-  private ObservableList<productData> menuListData;
-  public void menuShowData () {
-    menuListData = menuDisplayOrder() ;
-
-    menu_col_productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
-    menu_col_quantity. setCellValueFactory(new PropertyValueFactory<>("quantity"));
-    menu_col_price.setCellValueFactory(new PropertyValueFactory<> ("price") );
-
-
-    menu_tableView.setItems(cardListData);
+    menu_tableView.setItems (menuOrderListData);
   }
+
+  private  double totalP;
+  public  void  menuGetTotal() {
+    customerID();
+    String total = "SELECT SUM(price) FROM customer WHERE customer_id = " + cID;
+
+    connect = database.connectDB();
+
+    try
+    {
+      prepare= connect.prepareStatement(total);
+      result = prepare.executeQuery();
+
+      if(result.next()) {
+        totalP = result.getDouble("SUM(price)");
+      }
+
+
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  public  void menuDisplayTotal() {
+
+    menuGetTotal();
+    menu_total.setText("$" + totalP);
+  }
+
+  private  double amount;
+  private  double change;
+  public  void menuAmount() {
+    menuGetTotal();
+    if (menu_amount.getText() .isEmpty() || totalP == 0) {
+      alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error Message");
+      alert.setHeaderText(null);
+      alert.setContentText("Lỗi :33");
+      alert.showAndWait();
+    }
+    else{
+       amount = Double. parseDouble (menu_amount.getText() );
+      double change = 0;
+      if (amount < totalP) {
+        menu_amount.setText ("");
+      }
+      else {
+        change = (amount - totalP) ;
+        menu_change.setText ("$" + change);
+      }
+      }
+  }
+
+
   private  int cID;
   public  void customerID() {
 
@@ -643,7 +695,9 @@ public class mainFormController  implements Initializable {
       menu_form.setVisible(true);
 
       menuDisplayCard();
-      menuDisplayOrder();
+
+      menuDisplayTotal();
+      menuShowOrderData();
     }
   }
 
@@ -689,6 +743,8 @@ public class mainFormController  implements Initializable {
     inventoryStatusList();
     inventoryShowData();
     menuDisplayCard();
-    menuDisplayOrder();
+    menuGetOrder();
+    menuDisplayTotal();
+    menuShowOrderData();
   }
 }
