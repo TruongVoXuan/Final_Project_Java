@@ -87,7 +87,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="dashboard_form" layoutX="256.0" layoutY="131.0" prefHeight="600.0" prefWidth="864.8" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="dashboard_form" layoutX="256.0" layoutY="131.0" prefHeight="600.0" prefWidth="864.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="16.0" layoutY="14.0" prefHeight="160.0" prefWidth="836.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
                                  <styleClass>
@@ -112,7 +112,7 @@
                                                             <Font size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
+                                                      <Label fx:id="dashboard_NC" alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
                                                          <font>
                                                             <Font size="16.0" />
                                                          </font>
@@ -131,7 +131,7 @@
                                                             <Font size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
+                                                      <Label fx:id="dashboard_TI" alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
                                                          <font>
                                                             <Font size="16.0" />
                                                          </font>
@@ -150,7 +150,7 @@
                                                             <Font size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
+                                                      <Label fx:id="dashboard_TotalI" alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
                                                          <font>
                                                             <Font size="16.0" />
                                                          </font>
@@ -169,7 +169,7 @@
                                                             <Font size="16.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
+                                                      <Label fx:id="dashboard_NSP" alignment="CENTER_RIGHT" layoutX="100.0" layoutY="14.0" prefHeight="18.0" prefWidth="82.0" text="0" AnchorPane.rightAnchor="4.800000000000011">
                                                          <font>
                                                             <Font size="16.0" />
                                                          </font>
@@ -196,7 +196,7 @@
                                           <String fx:value="radius" />
                                        </styleClass>
                                        <children>
-                                          <AreaChart layoutX="-18.0" layoutY="-23.0" prefHeight="377.6" prefWidth="441.0" title="Thu nhập ngày hôm nay" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <AreaChart fx:id="dashboard_incomeChart" layoutX="-18.0" layoutY="-23.0" prefHeight="377.6" prefWidth="441.0" title="Thu nhập ngày hôm nay" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -213,7 +213,7 @@
                                           <String fx:value="radius" />
                                        </styleClass>
                                        <children>
-                                          <BarChart layoutX="-140.0" layoutY="-76.0" prefHeight="350.4" prefWidth="360.0" title="Số lượng khách hàng" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <BarChart fx:id="dashboard_CustomerChart" layoutX="-140.0" layoutY="-76.0" prefHeight="350.4" prefWidth="360.0" title="Số lượng khách hàng" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -382,7 +382,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="customers_form" layoutX="99.0" layoutY="79.0" prefHeight="600.0" prefWidth="864.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="customers_form" layoutX="99.0" layoutY="79.0" prefHeight="600.0" prefWidth="864.8" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="20.0" layoutY="21.0" prefHeight="558.0" prefWidth="824.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.bottomAnchor="20.800000000000068" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.799999999999955" AnchorPane.topAnchor="21.0">
                                  <styleClass>
