@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import truongvx.wheyshopmanagement.utils.customersData;
 import truongvx.wheyshopmanagement.utils.data;
 import truongvx.wheyshopmanagement.utils.database;
 import truongvx.wheyshopmanagement.utils.productData;
@@ -156,6 +157,26 @@ public class mainFormController  implements Initializable {
 
   @FXML
   private Label menu_total;
+
+
+
+  @FXML
+  private TableColumn<customersData, String> customers_col_cashier;
+
+  @FXML
+  private TableColumn<customersData, String> customers_col_customerID;
+
+  @FXML
+  private TableColumn<customersData, String> customers_col_date;
+
+  @FXML
+  private TableColumn<customersData, String> customers_col_total;
+
+  @FXML
+  private AnchorPane customers_form;
+
+  @FXML
+  private TableView<customersData> customers_tableView;
 
 
   private Alert alert;
@@ -808,13 +829,14 @@ public class mainFormController  implements Initializable {
       dashboard_form.setVisible(true);
       inventory_form.setVisible(false);
       menu_form.setVisible(false);
-
+      customers_form.setVisible(false);
 
     }
     else  if (event.getSource() == inventory_btn){
       dashboard_form.setVisible(false);
       inventory_form.setVisible(true);
       menu_form.setVisible(false);
+      customers_form.setVisible(false);
 
       inventoryTypeList();
       inventoryStatusList();
@@ -824,11 +846,24 @@ public class mainFormController  implements Initializable {
       dashboard_form.setVisible(false);
       inventory_form.setVisible(false);
       menu_form.setVisible(true);
+      customers_form.setVisible(false);
 
       menuDisplayCard();
 
       menuDisplayTotal();
       menuShowOrderData();
+    }
+    else  if(event.getSource() == customers_btn){
+
+      dashboard_form.setVisible(false);
+      inventory_form.setVisible(false);
+      menu_form.setVisible(false);
+      customers_form.setVisible(true);
+
+
+      customersShowData();
+
+
     }
   }
 
@@ -868,6 +903,43 @@ public class mainFormController  implements Initializable {
 
 
 
+  public  ObservableList<customersData> customersDataList() {
+    ObservableList<customersData> listData = FXCollections.observableArrayList();
+    String sql = "SELECT * FROM receipt";
+    connect = database.connectDB();
+
+    try{
+      prepare = connect.prepareStatement(sql);
+      result = prepare.executeQuery();
+      customersData cData;
+
+      while (result.next())
+      {
+          cData = new customersData(result.getInt("id"),
+              result.getInt("customer_id"),
+              result.getDouble("total"),
+              result.getDate("date"),result.getString("em_username"));
+        listData.add(cData);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return  listData;
+  }
+
+
+  private ObservableList<customersData> customersListData;
+
+  public void customersShowData () {
+    customersListData  = customersDataList();
+    customers_col_customerID.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+    customers_col_total.setCellValueFactory(new PropertyValueFactory<>("total"));
+    customers_col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+    customers_col_cashier.setCellValueFactory(new PropertyValueFactory<>("emUsername"));
+
+    customers_tableView.setItems(customersListData);
+
+  }
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -879,5 +951,7 @@ public class mainFormController  implements Initializable {
     menuGetOrder();
     menuDisplayTotal();
     menuShowOrderData();
+
+    customersShowData();
   }
 }

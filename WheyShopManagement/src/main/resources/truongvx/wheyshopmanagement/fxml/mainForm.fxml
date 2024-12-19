@@ -59,7 +59,7 @@
                               <Button fx:id="dashboard_btn" layoutX="12.0" layoutY="214.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="TỔNG QUAN" />
                               <Button fx:id="inventory_btn" layoutX="12.0" layoutY="271.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHO HÀNG" />
                               <Button fx:id="menu_btn" layoutX="12.0" layoutY="327.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="MENU" />
-                              <Button fx:id="customers_btn" layoutX="12.0" layoutY="383.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHÁCH HÀNG" />
+                              <Button fx:id="customers_btn" layoutX="12.0" layoutY="383.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../CSS/mainFormDesgin.css" text="KHÁCH HÀNG" />
                               <Button fx:id="logout_btn" layoutX="14.0" layoutY="558.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="26.0" stylesheets="@../CSS/mainFormDesgin.css" textFill="#403c3c" AnchorPane.bottomAnchor="10.8" AnchorPane.leftAnchor="14.0">
                                  <graphic>
                                     <ImageView fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" styleClass="logout">
@@ -315,7 +315,7 @@
                               <Separator layoutX="13.0" layoutY="275.0" prefHeight="1.0" prefWidth="838.0" AnchorPane.bottomAnchor="321.8" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="14.199999999999932" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="menu_form" layoutX="164.0" layoutY="162.0" prefHeight="600.0" prefWidth="864.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="menu_form" layoutX="164.0" layoutY="162.0" prefHeight="600.0" prefWidth="864.8" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="578.0" prefWidth="549.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.bottomAnchor="7.600000000000023" AnchorPane.leftAnchor="14.399999999999977" AnchorPane.rightAnchor="301.19999999999993" AnchorPane.topAnchor="13.600000000000023">
                                  <styleClass>
@@ -378,6 +378,35 @@
                                     <Button fx:id="menu_payBtn" layoutX="13.0" layoutY="427.0" mnemonicParsing="false" onAction="#menuPayBtn" prefHeight="35.0" prefWidth="249.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Thanh Toán" AnchorPane.bottomAnchor="116.19999999999997" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="15.200000000000017" />
                                     <Button fx:id="menu_removeBtn" layoutX="14.0" layoutY="495.0" mnemonicParsing="false" onAction="#menuRemoveBtn" prefHeight="35.0" prefWidth="117.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Xóa" AnchorPane.bottomAnchor="48.199999999999974" AnchorPane.leftAnchor="12.8" />
                                     <Button fx:id="menu_receiptBtn" layoutX="153.0" layoutY="495.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Hóa đơn" AnchorPane.bottomAnchor="47.999999999999986" AnchorPane.rightAnchor="14.200000000000017" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="customers_form" layoutX="99.0" layoutY="79.0" prefHeight="600.0" prefWidth="864.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="20.0" layoutY="21.0" prefHeight="558.0" prefWidth="824.0" stylesheets="@../CSS/mainFormDesgin.css" AnchorPane.bottomAnchor="20.800000000000068" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.799999999999955" AnchorPane.topAnchor="21.0">
+                                 <styleClass>
+                                    <String fx:value="white_bg" />
+                                    <String fx:value="shadow" />
+                                    <String fx:value="radius" />
+                                 </styleClass>
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Customers" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="customers_tableView" layoutX="14.0" layoutY="52.0" prefHeight="487.0" prefWidth="798.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="19.200000000000102" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="11.200000000000045" AnchorPane.topAnchor="52.00000000000006">
+                                      <columns>
+                                        <TableColumn fx:id="customers_col_customerID" prefWidth="171.99997329711914" text="Customer ID" />
+                                        <TableColumn fx:id="customers_col_total" prefWidth="309.6000213623047" text="Total" />
+                                          <TableColumn fx:id="customers_col_date" prefWidth="169.60003662109375" text="Date" />
+                                          <TableColumn fx:id="customers_col_cashier" prefWidth="147.199951171875" text="Cashier" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
                                  </children>
                               </AnchorPane>
                            </children>
