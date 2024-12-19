@@ -545,8 +545,9 @@ public class mainFormController  implements Initializable {
   }
 
   public  ObservableList<productData> menuGetOrder() {
+    customerID();
       ObservableList<productData> listData = FXCollections.observableArrayList();
-      String sql ="SELECT * FROM customer";
+      String sql ="SELECT * FROM customer WHERE customer_id = "+cID;
 
       connect = database.connectDB();
       try
@@ -631,6 +632,136 @@ public class mainFormController  implements Initializable {
       }
   }
 
+  public  void menuPayBtn() {
+    if(totalP ==0) {
+      alert= new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error Message");
+      alert.setContentText("Hãy đặt ít nhất 1 món!");
+      alert.showAndWait();
+    }
+    else {
+      menuGetTotal();
+      String insertPay = "INSERT INTO receipt (customer_id, total, date, em_username)"
+          + "VALUES(?,?,?,?)";
+      connect= database.connectDB();
+
+
+
+      try{
+
+        if(amount ==0)
+        {
+          alert= new Alert(Alert.AlertType.ERROR);
+          alert.setTitle ("Error Messaged") ;
+          alert.setHeaderText (null);
+          alert.setContentText ("Lỗi:3");
+          alert.showAndWait ();
+        }
+        else {
+
+          alert= new Alert(Alert.AlertType.CONFIRMATION);
+          alert.setTitle("Confirmation Message");
+          alert.setHeaderText(null);
+          alert.setContentText ("Bạn có chắc chắn?");
+          Optional<ButtonType> option = alert.showAndWait ();
+
+          if(option.get().equals(ButtonType.OK))
+          {
+            customerID();
+            menuGetTotal();
+            prepare = connect.prepareStatement(insertPay);
+            prepare.setString(1, String.valueOf(cID));
+            prepare.setString(2,String.valueOf(totalP));
+
+
+            Date date = new Date ();
+            java.sql.Date sqlDate = new java.sql.Date (date.getTime ());
+
+            prepare.setString(3,String.valueOf(sqlDate));
+            prepare.setString(4,data.username);
+
+            prepare.executeUpdate();
+
+            alert= new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle ("Information Message");
+            alert.setHeaderText (null);
+            alert.setContentText ("Thanh toán thành công!");
+            alert.showAndWait();
+
+            menuShowOrderData();
+            menuRestart();
+          }
+          else {
+            alert= new Alert(Alert.AlertType.WARNING);
+            alert.setTitle ("Information Message");
+            alert.setHeaderText (null);
+            alert.setContentText ("Cancelled.");
+            alert.showAndWait();
+          }
+
+        }
+
+
+
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private int getid;
+  public  void menuSelectOrder() {
+    productData prod = menu_tableView.getSelectionModel () .getSelectedItem();
+    int num = menu_tableView.getSelectionModel () .getSelectedIndex ();
+    if((num -1) <- 1) return;
+
+    //Chọn lấy id của sản phẩm
+    getid = prod.getId();
+  }
+
+  public void menuRemoveBtn() {
+    if (totalP == 0) { // Giả sử totalProducts là biến lưu tổng số sản phẩm hiện có
+      alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Order Product");
+      alert.setHeaderText(null);
+      alert.setContentText("Không có sản phẩm để xóa. Vui lòng đặt hàng sản phẩm trước.");
+      alert.showAndWait();
+    } else if (getid == 0) {
+      alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Error Message");
+      alert.setHeaderText(null);
+      alert.setContentText("Vui lòng chọn sản phẩm muốn xóa!");
+      alert.showAndWait();
+    } else {
+      String deleteData = "DELETE FROM customer WHERE id =" + getid;
+      connect = database.connectDB();
+      try {
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Message");
+        alert.setHeaderText(null);
+        alert.setContentText("Bạn có chắc chắn muốn xóa sản phẩm này?");
+
+        Optional<ButtonType> option = alert.showAndWait();
+
+        if (option.get().equals(ButtonType.OK)) {
+          prepare = connect.prepareStatement(deleteData);
+          prepare.executeUpdate(); // Use executeUpdate() for DELETE statements
+        }
+
+        menuShowOrderData();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  public  void menuRestart() {
+    totalP=0;
+    change=0;
+    amount =0;
+    menu_total.setText("$0.0");
+    menu_amount.setText("");
+    menu_change.setText("$0.0");
+  }
 
   private  int cID;
   public  void customerID() {
@@ -734,6 +865,8 @@ public class mainFormController  implements Initializable {
       user = user.substring(0, 1).toUpperCase() + user.substring(1);
     username.setText(user);
   }
+
+
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {

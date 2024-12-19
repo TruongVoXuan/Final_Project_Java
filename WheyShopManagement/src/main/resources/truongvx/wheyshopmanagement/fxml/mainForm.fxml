@@ -342,7 +342,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="menu_tableView" layoutX="9.0" layoutY="14.0" prefHeight="264.0" prefWidth="263.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="5.600000000000023" AnchorPane.topAnchor="14.0">
+                                    <TableView fx:id="menu_tableView" layoutX="9.0" layoutY="14.0" onMouseClicked="#menuSelectOrder" prefHeight="264.0" prefWidth="263.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="5.600000000000023" AnchorPane.topAnchor="14.0">
                                       <columns>
                                         <TableColumn fx:id="menu_col_productName" prefWidth="105.599853515625" text="Tên Sản Phẩm" />
                                         <TableColumn fx:id="menu_col_quantity" prefWidth="79.199951171875" text="Số Lượng" />
@@ -375,8 +375,8 @@
                                           <Font size="15.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="menu_payBtn" layoutX="13.0" layoutY="427.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="249.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Thanh Toán" AnchorPane.bottomAnchor="116.19999999999997" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="15.200000000000017" />
-                                    <Button fx:id="menu_removeBtn" layoutX="14.0" layoutY="495.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="117.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Xóa" AnchorPane.bottomAnchor="48.199999999999974" AnchorPane.leftAnchor="12.8" />
+                                    <Button fx:id="menu_payBtn" layoutX="13.0" layoutY="427.0" mnemonicParsing="false" onAction="#menuPayBtn" prefHeight="35.0" prefWidth="249.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Thanh Toán" AnchorPane.bottomAnchor="116.19999999999997" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="15.200000000000017" />
+                                    <Button fx:id="menu_removeBtn" layoutX="14.0" layoutY="495.0" mnemonicParsing="false" onAction="#menuRemoveBtn" prefHeight="35.0" prefWidth="117.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Xóa" AnchorPane.bottomAnchor="48.199999999999974" AnchorPane.leftAnchor="12.8" />
                                     <Button fx:id="menu_receiptBtn" layoutX="153.0" layoutY="495.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="btn" stylesheets="@../CSS/mainFormDesgin.css" text="Hóa đơn" AnchorPane.bottomAnchor="47.999999999999986" AnchorPane.rightAnchor="14.200000000000017" />
                                  </children>
                               </AnchorPane>
