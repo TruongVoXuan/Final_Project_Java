@@ -222,7 +222,7 @@ public class mainFormController  implements Initializable {
     connect = database.connectDB();
 
     try{
-        int nc =0;
+      int nc =0;
       prepare = connect.prepareStatement (sql);
       result = prepare.executeQuery () ;
 
@@ -331,19 +331,19 @@ public class mainFormController  implements Initializable {
     }
   }
   public  void inventoryAddBtn() {
-      if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null){
+    if(inventory_productID.getText().isEmpty() ||  inventory_productName.getText().isEmpty() || inventory_type.getSelectionModel().getSelectedItem()==null || inventory_stock.getText().isEmpty() || inventory_price.getText().isEmpty() || inventory_status.getSelectionModel().getSelectedItem()==null || data.path == null){
 
 
-        alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Thông báo lỗi");
-        alert.setHeaderText (null);
-        alert.setContentText ("Vui nhập nhập đầy đủ các trường!");
-        alert.showAndWait ();
+      alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Thông báo lỗi");
+      alert.setHeaderText (null);
+      alert.setContentText ("Vui nhập nhập đầy đủ các trường!");
+      alert.showAndWait ();
 
 
 
-      }
-      else {
+    }
+    else {
       String checkProdID = "SELECT prod_id FROM product WHERE prod_id = '"
           + inventory_productID.getText() +"'";
 
@@ -427,17 +427,17 @@ public class mainFormController  implements Initializable {
       String path = data.path;
       path = path.replace ("\\", "\\\\");
 
-        String updateData= "UPDATE product SET  "
-            + "prod_id = '" + inventory_productID.getText() + "', prod_name = '" +inventory_productName.getText() + "',type = '" + inventory_type.getSelectionModel().getSelectedItem() + "', stock = '" + inventory_stock.getText() + "', price = '" + inventory_price.getText() + "', status ='"+ inventory_status.getSelectionModel().getSelectedItem() +"', image = '" + path + "', date = '" +data.date + "' WHERE id = " + data.id;
+      String updateData= "UPDATE product SET  "
+          + "prod_id = '" + inventory_productID.getText() + "', prod_name = '" +inventory_productName.getText() + "',type = '" + inventory_type.getSelectionModel().getSelectedItem() + "', stock = '" + inventory_stock.getText() + "', price = '" + inventory_price.getText() + "', status ='"+ inventory_status.getSelectionModel().getSelectedItem() +"', image = '" + path + "', date = '" +data.date + "' WHERE id = " + data.id;
 
 
-        connect = database.connectDB();
-        try {
+      connect = database.connectDB();
+      try {
 
-            alert = new Alert(Alert.AlertType.CONFIRMATION);
-          alert.setTitle("Error Message");
-          alert.setHeaderText (null);
-          alert.setContentText ("Xác nhận cập nhập id: " + inventory_productID.getText() );
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Error Message");
+        alert.setHeaderText (null);
+        alert.setContentText ("Xác nhận cập nhập id: " + inventory_productID.getText() );
         Optional<ButtonType> option =  alert.showAndWait();
 
         if(option.get().equals(ButtonType.OK))
@@ -465,9 +465,9 @@ public class mainFormController  implements Initializable {
         }
 
 
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
   }
 
@@ -507,11 +507,11 @@ public class mainFormController  implements Initializable {
         String deleteData = "DELETE FROM product WHERE id = " + data.id;
 
         try {
-            prepare = connect.prepareStatement(deleteData);
-            prepare.executeUpdate();
+          prepare = connect.prepareStatement(deleteData);
+          prepare.executeUpdate();
 
 
-            alert =new Alert(Alert.AlertType.ERROR);
+          alert =new Alert(Alert.AlertType.ERROR);
           alert.setTitle("Error Message");
           alert.setHeaderText (null);
           alert.setContentText ("Xóa thành công!");
@@ -525,7 +525,7 @@ public class mainFormController  implements Initializable {
         }
       }
       else {
-            alert=new Alert(Alert.AlertType.ERROR);
+        alert=new Alert(Alert.AlertType.ERROR);
         alert.setTitle ("Error Message");
         alert.setHeaderText (null);
         alert.setContentText ("Cancelled");
@@ -556,16 +556,16 @@ public class mainFormController  implements Initializable {
 
     connect = database.connectDB();
     try {
-          prepare = connect.prepareStatement(sql);
-          result = prepare.executeQuery();
+      prepare = connect.prepareStatement(sql);
+      result = prepare.executeQuery();
 
-          productData prodData;
+      productData prodData;
 
-          while (result.next()){
-            prodData = new productData(result.getInt("id"), result.getString("prod_id"),result.getString("prod_name"),result.getString("type"),result.getInt("stock"), result.getDouble("price"),result.getString("status"),result.getString("image"),result.getDate("date"));
+      while (result.next()){
+        prodData = new productData(result.getInt("id"), result.getString("prod_id"),result.getString("prod_name"),result.getString("type"),result.getInt("stock"), result.getDouble("price"),result.getString("status"),result.getString("image"),result.getDate("date"));
 
-            listData.add(prodData);
-          }
+        listData.add(prodData);
+      }
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -600,7 +600,7 @@ public class mainFormController  implements Initializable {
     inventory_stock.setText (String.valueOf(prodData.getStock()));
     inventory_price.setText (String.valueOf(prodData.getPrice()));
 
-   data.path = prodData.getImage();
+    data.path = prodData.getImage();
 
     String path = "File:" + prodData.getImage ();
     data.date = String.valueOf(prodData.getDate());
@@ -684,17 +684,17 @@ public class mainFormController  implements Initializable {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(getClass().getResource("/truongvx/wheyshopmanagement/fxml/cardProduct.fxml"));
         AnchorPane pane = load.load();
-       cardProductController cardC = load .getController();
-       cardC.setData(cardListData.get(q));
+        cardProductController cardC = load .getController();
+        cardC.setData(cardListData.get(q));
 
-       if(column ==3) {
-         column=0;
-         row = row+1;
-       }
+        if(column ==3) {
+          column=0;
+          row = row+1;
+        }
 
-       menu_gridPane.add(pane,column++,row);
+        menu_gridPane.add(pane,column++,row);
 
-      GridPane.setMargin(pane, new Insets(10));
+        GridPane.setMargin(pane, new Insets(10));
 
 
       } catch (Exception e) {
@@ -705,27 +705,27 @@ public class mainFormController  implements Initializable {
 
   public  ObservableList<productData> menuGetOrder() {
     customerID();
-      ObservableList<productData> listData = FXCollections.observableArrayList();
-      String sql ="SELECT * FROM customer WHERE customer_id = "+cID;
+    ObservableList<productData> listData = FXCollections.observableArrayList();
+    String sql ="SELECT * FROM customer WHERE customer_id = "+cID;
 
-      connect = database.connectDB();
-      try
+    connect = database.connectDB();
+    try
+    {
+      prepare = connect.prepareStatement (sql);
+      result = prepare.executeQuery () ;
+
+      productData prod;
+
+      while (result.next())
       {
-        prepare = connect.prepareStatement (sql);
-        result = prepare.executeQuery () ;
-
-        productData prod;
-
-        while (result.next())
-        {
-          prod = new productData(result.getInt("id"), result.getString("prod_id"),result.getString("prod_name"), result.getString("type"),result.getInt("quantity") ,result.getDouble("price"), result.getString("image"), result.getDate("date"));
-          listData.add(prod);
-        }
-
-      } catch (Exception e) {
-        e.printStackTrace();
+        prod = new productData(result.getInt("id"), result.getString("prod_id"),result.getString("prod_name"), result.getString("type"),result.getInt("quantity") ,result.getDouble("price"), result.getString("image"), result.getDate("date"));
+        listData.add(prod);
       }
-      return  listData;
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return  listData;
   }
   private ObservableList<productData> menuOrderListData;
   public void menuShowOrderData () {
@@ -779,7 +779,7 @@ public class mainFormController  implements Initializable {
       alert.showAndWait();
     }
     else{
-       amount = Double. parseDouble (menu_amount.getText() );
+      amount = Double. parseDouble (menu_amount.getText() );
       double change = 0;
       if (amount < totalP) {
         menu_amount.setText ("");
@@ -788,7 +788,7 @@ public class mainFormController  implements Initializable {
         change = (amount - totalP) ;
         menu_change.setText ("$" + change);
       }
-      }
+    }
   }
 
   public  void menuPayBtn() {
@@ -1041,8 +1041,8 @@ public class mainFormController  implements Initializable {
   }
 
   public  void displayUsername() {
-      String user = data.username;
-      user = user.substring(0, 1).toUpperCase() + user.substring(1);
+    String user = data.username;
+    user = user.substring(0, 1).toUpperCase() + user.substring(1);
     username.setText(user);
   }
 
@@ -1060,10 +1060,10 @@ public class mainFormController  implements Initializable {
 
       while (result.next())
       {
-          cData = new customersData(result.getInt("id"),
-              result.getInt("customer_id"),
-              result.getDouble("total"),
-              result.getDate("date"),result.getString("em_username"));
+        cData = new customersData(result.getInt("id"),
+            result.getInt("customer_id"),
+            result.getDouble("total"),
+            result.getDate("date"),result.getString("em_username"));
         listData.add(cData);
       }
     } catch (Exception e) {
